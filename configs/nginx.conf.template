@@ -37,7 +37,7 @@ http {
         }
         
         location /keepass {
-            {{ access_list }}
+{{ access_list }}
             dav_methods  PUT DELETE MOVE;
             autoindex off;  
             alias /var/www/localhost/keepass;
