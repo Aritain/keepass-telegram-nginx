@@ -8,6 +8,7 @@ To get the general idea about KeePass - please read https://en.wikipedia.org/wik
 
 Overall there are obvious security issues regarding sending your kdbx file over telegram (and exposing it over nginx I guess), so it's up to you to use telegram part or not. If you don't want it - just remove the section from docker-compose file and you'll be fine.
 
+<br/><br/>
 ## How to 
 
 To get everything running you need to do a few steps.
