@@ -10,7 +10,7 @@ networks:
 
 services:
   nginx:
-    image: nginx-keepass:latest
+    image: ganhart/nginx-keepass:latest
     container_name: nginx-keepass
     restart: always
     logging:
@@ -31,7 +31,7 @@ services:
       - ./configs:/configs:ro
     entrypoint: ["/bin/sh", "/nginx-entrypoint.sh"]
   telegram_bot:
-    image: telegram-keepass:latest
+    image: ganhart/telegram-keepass:latest
     container_name: bot-keepass
     restart: always
     logging:
