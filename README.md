@@ -12,7 +12,7 @@ Overall there are obvious security issues regarding sending your kdbx file over 
 
 To get everything running you need to do a few steps.
 
-
+<br/><br/>
 **Preparation**
 
 0. Download the repo, also you'll need a docker engine on your host machine and TCP/80,443 ports exposed to the internet.
@@ -27,7 +27,7 @@ To get everything running you need to do a few steps.
     2.0.0.0/16
     ```
 
-
+<br/><br/>
 **Getting the keys and making everything work**
 
 Nginx here is using SSL certificates (it's adds a bit of security, yay), you can easily get LetsEncrypt certificates using this repo. To do this just launch all the containers using the following command
@@ -47,7 +47,7 @@ docker-compose up -d
 ```
 
 That's it. Now you have a fully working KeePass storage. You can access your KeePass file using the URL https://your-domain-here/keepass/your-keepass-file.kdbx, it's also works perfectly with windowns/linux/android clients.
-
+<br/><br/>
 ## Notes
 Just a few things you need to know about this storage in general:
 * By default your db file will be sent to you every 24 hours via telegram, you can change this time via docker-compose file (search for TIMEOUT env variable)
