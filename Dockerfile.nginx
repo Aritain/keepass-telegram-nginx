@@ -1,0 +1,10 @@
+FROM alpine:3.12.0
+
+COPY entrypoints/nginx-entrypoint.sh /nginx-entrypoint.sh
+COPY nginx/main.py /main.py
+COPY nginx/requirements.txt /requirements.txt
+
+RUN apk update --no-cache && apk add nginx perl wget abuild python3 py3-pip && \
+    pip3 install --no-cache-dir -r /requirements.txt
+
+EXPOSE  80 443

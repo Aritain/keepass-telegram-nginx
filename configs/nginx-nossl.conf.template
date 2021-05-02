@@ -1,0 +1,23 @@
+pid              /var/run/nginx.pid;
+user             root;
+
+events {
+    worker_connections  4096;  
+}
+
+
+http {
+    server {
+    	listen 80;
+
+    	server_name _;
+        location /.well-known/acme-challenge/ {
+          allow all;
+          root /etc/nginx/html/certbot;
+        }
+        location / {
+    	  return 301 https://$host$request_uri;
+        }
+    }
+
+}

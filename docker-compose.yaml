@@ -1,0 +1,70 @@
+version: '2.4'
+
+networks:
+  keepass_net:
+    driver: bridge
+    name: keepass_net
+    ipam:
+      config:
+        - subnet: 172.31.255.0/24
+
+services:
+  nginx:
+    image: nginx-keepass:latest
+    container_name: nginx-keepass
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"
+    networks:
+      keepass_net:
+        ipv4_address: 172.31.255.10
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./db:/var/www/localhost/keepass:rw
+      - ./keys/:/etc/nginx/keys/:ro
+      - ./nginx/:/etc/nginx/html/certbot:rw
+      - ./configs:/configs:ro
+    entrypoint: ["/bin/sh", "/nginx-entrypoint.sh"]
+  telegram_bot:
+    image: telegram-keepass:latest
+    container_name: bot-keepass
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"
+    networks:
+      keepass_net:
+        ipv4_address: 172.31.255.11
+    environment:
+      - TIMEOUT=86400
+      - TOKEN=
+      - USER=
+    volumes:
+      - ./db:/db:ro
+      - ./token:/bot/token:ro
+  certbot:
+    container_name: certbot
+    image: ganhart/certbot:latest
+    restart: always
+    pid: "service:nginx"
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: 1m
+    networks:
+      keepass_net:
+        ipv4_address: 172.31.255.12
+    volumes:
+      - ./keys/:/etc/letsencrypt
+      - ./nginx:/var/www/certbot
+    entrypoint: [ "/bin/sh", "-c", "trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;" ]
+version: '2.4'
+
