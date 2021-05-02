@@ -13,6 +13,7 @@ Overall there are obvious security issues regarding sending your kdbx file over 
 To get everything running you need to do a few steps.
 
 **Preparation**
+
 0. Download the repo, also you'll need a docker engine on your host machine and TCP/80,443 ports exposed to the internet.
 1. Create (or use your existing one) and upload .kdbx file to db/ directory inside repo. Default name of .kdbx file is main.kdbx, but you can change in docker-compose file - check "DB" env variable.
 2. If you deside to use telegram part:
@@ -26,6 +27,7 @@ To get everything running you need to do a few steps.
     ```
     
 **Getting the keys and making everything work**
+
 Nginx here is using SSL certificates (it's adds a bit of security, yay), you can easily get LetsEncrypt certificates using this repo. To do this just launch all the containers using the following command
 ```
 docker-compose up -d
