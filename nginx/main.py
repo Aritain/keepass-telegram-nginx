@@ -7,6 +7,10 @@ if __name__ == '__main__':
     
     try:
         domain_dir = os.listdir(nginx_keys_dir)
+        try:
+            domain_dir.remove('README')
+        except:
+            pass
         domain = ''.join(domain_dir)
         ssl_certs_config = (
             f'ssl_certificate         keys/live/{domain}/cert.pem;\n' +
@@ -17,12 +21,14 @@ if __name__ == '__main__':
         template_file = "nginx-nossl.conf.template"
 
     with open(access_file) as f:
-        acl_content = f.readlines()
+        acl_content = f.read().splitlines()
     
+    acl_content = [ f"            allow {elem};" for elem in acl_content ]
+  
     if len(acl_content) != 0:
-        acl_content.append('deny all')
+        acl_content.append('            deny all;')
 
-    acl_template = '            '.join(acl_content)
+    acl_template = '\n'.join(acl_content)
     
     
     templateLoader = jinja2.FileSystemLoader(searchpath="/configs/")
