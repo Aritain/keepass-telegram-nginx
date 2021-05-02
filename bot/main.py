@@ -3,7 +3,8 @@ import time
 import telegram
 
 
-db_file = '/db/main.kdbx'
+db_name = os.environ['DB']
+db_file = f'/db/{db_name}'
 timeout = int(os.environ['TIMEOUT'])
 telegram_token = os.environ['TOKEN']
 user_id = os.environ['USER']

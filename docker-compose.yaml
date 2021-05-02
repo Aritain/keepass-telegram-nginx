@@ -43,6 +43,7 @@ services:
       keepass_net:
         ipv4_address: 172.31.255.11
     environment:
+      - DB=main.kdbx
       - TIMEOUT=86400
       - TOKEN=
       - USER=
