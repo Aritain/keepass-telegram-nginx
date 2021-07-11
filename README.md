@@ -20,11 +20,11 @@ To get everything running you need to do a few steps.
 1. Create (or use your existing one) and upload .kdbx file to db/ directory inside repo. Default name of .kdbx file is main.kdbx, but you can change in docker-compose file - check "DB" env variable.
 2. If you deside to use telegram part:
 
-2.1. Add your telegram ID (you can find it via @username_to_id_bot bot) to compose file under "USER=" environment variable
+    2.1. Add your telegram ID (you can find it via @username_to_id_bot bot) to compose file under "USER=" environment variable
 
-2.2. Create a telegram bot via @BotFather and get its token
+    2.2. Create a telegram bot via @BotFather and get its token
 
-2.3. Add that token to compose file under "TOKEN=" environment variable
+    2.3. Add that token to compose file under "TOKEN=" environment variable
 
 3. If you'll like to additionally protect your .kdbx exposed via nginx you can modify configs/access_lists file and add IP prefixed you'd like to permit each one starting with a new line with no additional separators. If you won't do that nginx will be able to give your file to pretty much everyone on the internet. So the formation should look like this:
     ```
